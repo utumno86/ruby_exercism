@@ -29,7 +29,6 @@ class BowlingTest < Minitest::Test
   end
 
   def test_points_scored_in_the_roll_after_a_spare_are_counted_twice
-    skip
     record([6, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     assert_equal 16, @game.score
   end
