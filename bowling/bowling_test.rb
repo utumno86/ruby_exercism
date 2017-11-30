@@ -34,7 +34,6 @@ class BowlingTest < Minitest::Test
   end
 
   def test_consecutive_spares_each_get_a_one_roll_bonus
-    skip
     record([5, 5, 3, 7, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     assert_equal 31, @game.score
   end
