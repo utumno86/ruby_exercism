@@ -11,7 +11,7 @@ class Game
   end
 
   def roll(pins)
-    # puts "Frame: #{@frame} Frame_Score: #{@frame_score} Strikes: #{@strikes} Spares #{@spares} Score #{@score}"
+    puts "Frame: #{@frame} Frame_Score: #{@frame_score} Pins #{pins} Strikes: #{@strikes} Spares #{@spares} Score #{@score}"
     scoring(pins)
 
     strikesspares(pins)
@@ -23,28 +23,31 @@ class Game
     if @throw == 2
       @frame += 1
       @frame_score = 0
-      @throw = 0
+      @throw = 1
     else
       @throw += 1
     end
   end
 
   def scoring(pins)
-    if @frame < 8
+    if @frame <= 10
       @score += pins
-    end
+      if @spares > 0
+        @score += pins
+        @spares -= 1
+      end
 
-    if @spares > 0
-      @score += pins
-      @spares -= 1
-    end
-
-    if @strikes.any? { |e| e > 0 }
-      0.upto(@strikes.length - 1) do |i|
-        unless (@strikes[i]).zero?
-          @score += pins
-          @strikes[i] -= 1
+      if @strikes.any? { |e| e > 0 } && !(@frame == 10 && @throw == 2)
+        0.upto(@strikes.length - 1) do |i|
+          unless (@strikes[i]).zero?
+            @score += pins
+            @strikes[i] -= 1
+          end
         end
+      end
+    else
+      if @strikes.any? { |e| e > 0 } || @spares > 0
+        @score += pins
       end
     end
 
