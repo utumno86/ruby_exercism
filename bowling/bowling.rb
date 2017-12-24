@@ -37,7 +37,7 @@ class Game
         @spares -= 1
       end
 
-      if @strikes.any? { |e| e > 0 } && !(@frame == 10 && @throw == 2)
+      if @strikes.any? { |e| e > 0 } && !(@frame >= 10 && @throw == 2)
         0.upto(@strikes.length - 1) do |i|
           unless (@strikes[i]).zero?
             @score += pins
@@ -57,6 +57,7 @@ class Game
   def strikesspares(pins)
     if pins == 10
       @strikes.push(2)
+      @throw = 2
     elsif @frame_score == 10
       @spares += 1
     end
