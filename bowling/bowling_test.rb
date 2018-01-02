@@ -145,7 +145,6 @@ class BowlingTest < Minitest::Test
   end
 
   def test_an_incomplete_game_can_not_be_scored
-    skip
     record([0, 0])
     assert_raises Game::BowlingError do
       @game.score
@@ -153,7 +152,6 @@ class BowlingTest < Minitest::Test
   end
 
   def test_cannot_roll_if_game_already_has_ten_frames
-    skip
     record([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     assert_raises Game::BowlingError do
       @game.roll(0)

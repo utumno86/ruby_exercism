@@ -1,5 +1,4 @@
 class Game
-  attr_reader :score
 
   def initialize
     @score = 0
@@ -73,6 +72,11 @@ class Game
     elsif @frame_score == 10
       @spares += 1
     end
+  end
+
+  def score
+    raise BowlingError, "Game not complete" if @frame < 10
+    @score
   end
 end
 
