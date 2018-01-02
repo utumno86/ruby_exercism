@@ -30,12 +30,13 @@ class Game
   end
 
   def scoring(pins)
+    if @spares > 0
+      @score += pins
+      @spares -= 1
+    end
+
     if @frame <= 10
       @score += pins
-      if @spares > 0
-        @score += pins
-        @spares -= 1
-      end
 
       if @strikes.any? { |e| e > 0 } && !(@frame >= 10 && @throw == 2)
         0.upto(@strikes.length - 1) do |i|
@@ -45,10 +46,17 @@ class Game
           end
         end
       end
-    else
+    elsif @frame == 11
       if @strikes.any? { |e| e > 0 } || @spares > 0
-        @score += pins
+        0.upto(@strikes.length - 1) do |i|
+          unless (@strikes[i]).zero?
+            @score += pins
+            @strikes[i] -= 1
+          end
+        end
       end
+    elsif @frame == 12 && @strikes.any? { |e| e > 0 }
+      @score += pins
     end
 
     @frame_score += pins
