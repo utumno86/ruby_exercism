@@ -159,7 +159,6 @@ class BowlingTest < Minitest::Test
   end
 
   def test_bonus_rolls_for_a_strike_in_the_last_frame_must_be_rolled_before_score_can_be_calculated
-    skip
     record([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10])
     assert_raises Game::BowlingError do
       @game.score
@@ -167,7 +166,6 @@ class BowlingTest < Minitest::Test
   end
 
   def test_both_bonus_rolls_for_a_strike_in_the_last_frame_must_be_rolled_before_score_can_be_calculated
-    skip
     record([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10])
     assert_raises Game::BowlingError do
       @game.score
@@ -175,7 +173,6 @@ class BowlingTest < Minitest::Test
   end
 
   def test_bonus_roll_for_a_spare_in_the_last_frame_must_be_rolled_before_score_can_be_calculated
-    skip
     record([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3])
     assert_raises Game::BowlingError do
       @game.score
@@ -199,7 +196,6 @@ class BowlingTest < Minitest::Test
   # If you are curious, read more about constants on RubyDoc:
   # http://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/constants.html
   def test_bookkeeping
-    skip
     assert_equal 3, BookKeeping::VERSION
   end
 end

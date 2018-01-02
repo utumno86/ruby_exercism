@@ -10,7 +10,7 @@ class Game
   end
 
   def roll(pins)
-    # puts "Frame: #{@frame} Frame_Score: #{@frame_score} Pins #{pins} Strikes: #{@strikes} Spares #{@spares} Score #{@score}"
+    raise BowlingError, "This throw has occured after the game is over" if @frame > 10 && @strikes.none? { |e| e > 0 } && @spares.zero?
     raise BowlingError, "#{pins} pins is an invalid number of pins" if pins < 0 || pins > 10
 
     scoring(pins)
@@ -76,8 +76,15 @@ class Game
 
   def score
     raise BowlingError, "Game not complete" if @frame < 10
+    raise BowlingError, "Bonus Rolls must be made before scores can be calculated" if (@frame == 10 || @frame == 11) && (@spares > 0 || @strikes.any? { |e| e > 0 })
+    raise BowlingError, "Bonus Rolls must be made before scores can be calculated" if @frame == 12 && @strikes.any? { |e| e > 1 } && (@strikes.length > 1 && @frame_score == 0)
+
     @score
   end
 end
 
 class Game::BowlingError < StandardError; end
+
+class BookKeeping
+  VERSION = 3
+end
