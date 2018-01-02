@@ -11,8 +11,12 @@ class Game
   end
 
   def roll(pins)
-    puts "Frame: #{@frame} Frame_Score: #{@frame_score} Pins #{pins} Strikes: #{@strikes} Spares #{@spares} Score #{@score}"
+    # puts "Frame: #{@frame} Frame_Score: #{@frame_score} Pins #{pins} Strikes: #{@strikes} Spares #{@spares} Score #{@score}"
+    raise BowlingError, "#{pins} pins is an invalid number of pins" if pins < 0 || pins > 10
+
     scoring(pins)
+
+    raise BowlingError, "#{@frame_score} is more than 10" if @frame_score > 10
 
     strikesspares(pins)
 
@@ -71,3 +75,5 @@ class Game
     end
   end
 end
+
+class Game::BowlingError < StandardError; end
