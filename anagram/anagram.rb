@@ -4,13 +4,7 @@ class Anagram
   end
 
   def match(candidates)
-    matches = []
-    candidates.each do |candidate|
-      if candidate.downcase.chars.sort.join == @word.downcase.chars.sort.join && candidate.downcase != @word.downcase
-        matches.push(candidate)
-      end
-    end
-    matches
+    candidates.find_all{ |candidate| candidate.downcase.chars.sort.join == @word.downcase.chars.sort.join && candidate.downcase != @word.downcase }
   end
 end
 
