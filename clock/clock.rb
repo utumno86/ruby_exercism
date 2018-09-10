@@ -1,8 +1,7 @@
 class Clock
   def initialize(input_hash)
     @hours = input_hash[:hour] || 0
-    minutes = input_hash[:minute] || 0
-    @minutes = process_minutes(minutes)
+    @minutes = process_minutes(input_hash[:minute] || 0)
   end
 
   def to_s
@@ -12,7 +11,7 @@ class Clock
   def +(other)
     numbers = other.to_s.split(':')
     @hours += numbers[0].to_i
-    @minutes += process_minutes(numbers[1].to_i)
+    @minutes = process_minutes(numbers[1].to_i)
     to_s
   end
 
@@ -40,8 +39,15 @@ class Clock
   end
 
   def process_minutes(minutes)
-    @hours += minutes / 60
-    minutes % 60
+    total_minutes = @minutes ? (@minutes + minutes).to_i : minutes.to_i
+    while total_minutes >= 60
+      @hours += 1
+      total_minutes -= 60
+    end
+    while total_minutes < 0
+      @hours -= 1
+      total_minutes += 60
+    end
+    total_minutes
   end
-
 end
