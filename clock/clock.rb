@@ -1,7 +1,7 @@
 class Clock
-  def initialize(input_hash)
-    @hours = input_hash[:hour] || 0
-    @minutes = process_minutes(input_hash[:minute] || 0)
+  def initialize(initial_clock_values = { hour: 0, minute: 0 })
+    @hours = initial_clock_values[:hour] || 0
+    @minutes = process_minutes(initial_clock_values[:minute] || 0)
   end
 
   def to_s
@@ -22,9 +22,11 @@ class Clock
     to_s
   end
 
-  def ==(other_object)
-    other_object.to_s == to_s
+  def ==(other)
+    other.to_s == to_s
   end
+
+  private
 
   def calculate_hours(hours)
     case hours
