@@ -5,7 +5,6 @@ require_relative 'acronym'
 # Common test data version: 1.5.0 787d24e
 class AcronymTest < Minitest::Test
   def test_basic
-    # skip
     assert_equal "PNG", Acronym.abbreviate('Portable Network Graphics')
   end
 
