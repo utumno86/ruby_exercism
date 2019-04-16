@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require_relative 'clock'
 
-# Common test data version: 2.2.1 8b96944
+# Common test data version: 2.4.0 b344762
 class ClockTest < Minitest::Test
   def test_on_the_hour
     assert_equal "08:00", Clock.new(hour: 8).to_s
@@ -72,6 +72,10 @@ class ClockTest < Minitest::Test
     assert_equal "16:40", Clock.new(hour: 1, minute: -4820).to_s
   end
 
+  def test_negative_sixty_minutes_is_previous_hour
+    assert_equal "01:00", Clock.new(hour: 2, minute: -60).to_s
+  end
+
   def test_negative_hour_and_minutes_both_roll_over
     assert_equal "20:20", Clock.new(hour: -25, minute: -160).to_s
   end
@@ -110,7 +114,7 @@ class ClockTest < Minitest::Test
     assert_equal "00:01", (clock1 + Clock.new(minute: 2)).to_s
   end
 
-  def test_add_more_than_one_day__1500_min_is_equal_to_25_hrs
+  def test_add_more_than_one_day
     clock1 = Clock.new(hour: 5, minute: 32)
     assert_equal "06:32", (clock1 + Clock.new(minute: 1500)).to_s
   end
@@ -150,7 +154,7 @@ class ClockTest < Minitest::Test
     assert_equal "03:35", (clock1 - Clock.new(minute: 160)).to_s
   end
 
-  def test_subtract_more_than_one_day__1500_min_is_equal_to_25_hrs
+  def test_subtract_more_than_one_day
     clock1 = Clock.new(hour: 5, minute: 32)
     assert_equal "04:32", (clock1 - Clock.new(minute: 1500)).to_s
   end
@@ -250,24 +254,9 @@ class ClockTest < Minitest::Test
     assert clock1 == clock2
   end
 
-  # Problems in exercism evolve over time, as we find better ways to ask
-  # questions.
-  # The version number refers to the version of the problem you solved,
-  # not your solution.
-  #
-  # Define a constant named VERSION inside of the top level BookKeeping
-  # module, which may be placed near the end of your file.
-  #
-  # In your file, it will look like this:
-  #
-  # module BookKeeping
-  #   VERSION = 1 # Where the version number matches the one in the test.
-  # end
-  #
-  # If you are curious, read more about constants on RubyDoc:
-  # http://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/constants.html
-
-  def test_bookkeeping
-    assert_equal 3, BookKeeping::VERSION
+  def test_full_clock_and_zeroed_clock
+    clock1 = Clock.new(hour: 24, minute: 0)
+    clock2 = Clock.new(hour: 0, minute: 0)
+    assert clock1 == clock2
   end
 end
