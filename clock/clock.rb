@@ -11,16 +11,14 @@ class Clock
   end
 
   def +(other)
-    numbers = other.to_s.split(':')
-    @hours += numbers[0].to_i
-    @minutes = process_minutes(numbers[1].to_i)
+    hours, minutes = other.to_s.split(':')
+    @total_minutes += total_minutes(hours, minutes)
     to_s
   end
 
   def -(other)
-    numbers = other.to_s.split(':')
-    @hours -= numbers[0].to_i
-    @minutes = process_minutes(numbers[1].to_i, true)
+    hours, minutes = other.to_s.split(':')
+    @total_minutes -= total_minutes(hours, minutes)
     to_s
   end
 
