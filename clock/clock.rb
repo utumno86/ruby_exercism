@@ -1,6 +1,6 @@
 class Clock
-  def initialize(initial_clock_values = { hour: 0, minute: 0 })
-    @total_minutes = total_minutes(initial_clock_values[:hour], initial_clock_values[:minute])
+  def initialize(hour: 0, minute: 0)
+    @total_minutes = total_minutes(hour, minute)
     @hours = 0
   end
 
