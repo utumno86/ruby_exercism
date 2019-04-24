@@ -5,7 +5,3 @@ class Hamming
     string1.chars.zip(string2.chars).count { |i, j| i != j }
   end
 end
-
-class BookKeeping
-  VERSION = 3
-end
