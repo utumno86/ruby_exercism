@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-gem 'minitest', '>= 5.0.0'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative 'series'
@@ -43,8 +41,7 @@ class SeriesTest < Minitest::Test
 
   def test_other_slices_of_three
     series = Series.new('982347')
-    expected = ['982', '823', '234', '347']
-    assert_equal expected, series.slices(3)
+    assert_equal ['982', '823', '234', '347'], series.slices(3)
   end
 
   def test_simple_slices_of_four
@@ -76,6 +73,7 @@ class SeriesTest < Minitest::Test
 
   def test_more_complicated_slice_that_blows_up
     slice_string = '01032987583'
+
     series = Series.new(slice_string)
     assert_raises ArgumentError do
       series.slices(slice_string.length + 1)
