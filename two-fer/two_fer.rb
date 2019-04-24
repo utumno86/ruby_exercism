@@ -3,7 +3,3 @@ class TwoFer
     "One for #{name}, one for me."
   end
 end
-
-class BookKeeping
-  VERSION = 1
-end
