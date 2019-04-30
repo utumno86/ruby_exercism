@@ -6,9 +6,7 @@ class Clock
   end
 
   def to_s
-    hours = (@minutes / 60) % 24
-    minutes = @minutes % 60
-    format('%02d:%02d', hours, minutes)
+    format '%02i:%02i', hours, only_minutes
   end
 
   def +(other)
@@ -17,11 +15,19 @@ class Clock
   end
 
   def -(other)
-    @minutes -= other.minutes
+    @minutes += (-1 * other.minutes)
     to_s
   end
 
   def ==(other)
     to_s == other.to_s
+  end
+
+  def hours
+    (@minutes / 60) % 24
+  end
+
+  def only_minutes
+    @minutes % 60
   end
 end
