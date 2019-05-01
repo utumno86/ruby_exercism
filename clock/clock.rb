@@ -6,7 +6,7 @@ class Clock
   end
 
   def to_s
-    format '%02i:%02i' % [hours, only_minutes]
+    '%02i:%02i' % [hours, only_minutes]
   end
 
   def +(other)
