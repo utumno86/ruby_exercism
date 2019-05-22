@@ -38,6 +38,6 @@ class Luhn
   end
 
   def digits
-    @digits ||= stripped_number_string.each_char.map(&:to_i)
+    @digits ||= stripped_number.each_char.map(&:to_i)
   end
 end
