@@ -1,6 +1,8 @@
 require 'minitest/autorun'
+require 'minitest/pride'
 require_relative 'twelve_days'
 
+# Class to test whether I have programttically created the twelve days of christmas
 class TwelveDaysTest < Minitest::Test
   # This test is an acceptance test.
   #
