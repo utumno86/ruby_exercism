@@ -18,31 +18,31 @@ class TwelveDays
   ].freeze
 
   def self.song
-    full_song = ''
-    accumulated_gifts = ''
+    new.song
+  end
 
-    LYRICS.each do |line|
-      if first_line?(line[1])
-        accumulated_gifts = line[1]
-      else
-        accumulated_gifts = line[1] + ', ' + accumulated_gifts
-      end
-      full_song += "On the #{line[0]} day of Christmas my true love gave to me: #{accumulated_gifts}"
-      if !last_line?(line[1])
-        full_song += "\n\n"
-      else
-        full_song += "\n"
-      end
-      accumulated_gifts = 'and ' + accumulated_gifts if first_line?(line[1])
+  def song
+    12.times.map { |index| verse(index) }.join("\n\n")
+  end
+
+  def verse(index)
+    "On the #{LYRICS[index][0]} day of Christmas my true love gave to me: #{accumulated_gifts(index)}"
+  end
+
+  def accumulated_gifts(index)
+    case index
+    when 0
+      @gifts = LYRICS[0][1]
+    when 1
+      @gifts = add_lyrics(index) + 'and ' + @gifts
+    when 11
+      @gifts = add_lyrics(index) + @gifts + "\n"
+    else
+      @gifts = add_lyrics(index) + @gifts
     end
-    full_song
   end
 
-  def self.first_line?(line)
-    line == 'a Partridge in a Pear Tree.'
-  end
-
-  def self.last_line?(line)
-    line == 'twelve Drummers Drumming'
+  def add_lyrics(index)
+    LYRICS[index][1] + ', '
   end
 end
