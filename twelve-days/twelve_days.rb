@@ -37,8 +37,4 @@ class TwelveDays
     gifts[0] = gifts[0][4..-1] if gifts.length == 1
     gifts.reverse.join(', ')
   end
-
-  def add_lyrics(index)
-    LYRICS[index][1] + ', '
-  end
 end
