@@ -2,19 +2,34 @@
 
 # Programatically generates the lyrics to the twelve days of christmas
 class TwelveDays
-  LYRICS = [
-    ['first', 'and a Partridge in a Pear Tree.'],
-    ['second', 'two Turtle Doves'],
-    ['third', 'three French Hens'],
-    ['fourth', 'four Calling Birds'],
-    ['fifth', 'five Gold Rings'],
-    ['sixth', 'six Geese-a-Laying'],
-    ['seventh', 'seven Swans-a-Swimming'],
-    ['eighth', 'eight Maids-a-Milking'],
-    ['ninth', 'nine Ladies Dancing'],
-    ['tenth', 'ten Lords-a-Leaping'],
-    ['eleventh', 'eleven Pipers Piping'],
-    ['twelfth', 'twelve Drummers Drumming']
+  DAYS = [
+    'first',
+    'second',
+    'third',
+    'fourth',
+    'fifth',
+    'sixth',
+    'seventh',
+    'eighth',
+    'ninth',
+    'tenth',
+    'eleventh',
+    'twelfth'
+  ].freeze
+
+  GIFTS = [
+    'a Partridge in a Pear Tree.',
+    'two Turtle Doves',
+    'three French Hens',
+    'four Calling Birds',
+    'five Gold Rings',
+    'six Geese-a-Laying',
+    'seven Swans-a-Swimming',
+    'eight Maids-a-Milking',
+    'nine Ladies Dancing',
+    'ten Lords-a-Leaping',
+    'eleven Pipers Piping',
+    'twelve Drummers Drumming'
   ].freeze
 
   def self.song
@@ -26,15 +41,15 @@ class TwelveDays
   end
 
   def verse(index)
-    "On the #{LYRICS[index][0]} day of Christmas my true love gave to me: #{to_phrase(gifts(index))}"
+    "On the #{DAYS[index]} day of Christmas my true love gave to me: #{to_phrase(gifts(index+1))}"
   end
 
   def gifts(index)
-    (index + 1).times.map { |gift_index| LYRICS[gift_index][1] }
+    GIFTS.take(index).reverse
   end
 
   def to_phrase(gifts)
-    gifts[0] = gifts[0][4..-1] if gifts.length == 1
-    gifts.reverse.join(', ')
+    *gifts, last_gift = gifts
+    gifts.empty? ? last_gift : gifts.join(', ') + ', and ' + last_gift
   end
 end
