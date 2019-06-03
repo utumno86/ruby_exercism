@@ -37,7 +37,7 @@ class TwelveDays
   end
 
   def song
-    12.times.map { |index| verse(index) }.join("\n\n") + "\n"
+    12.times.map(&method(:verse)).join("\n\n") + "\n"
   end
 
   def verse(index)
@@ -50,6 +50,8 @@ class TwelveDays
 
   def to_phrase(gifts)
     *gifts, last_gift = gifts
-    gifts.empty? ? last_gift : gifts.join(', ') + ', and ' + last_gift
+    return last_gift if gifts.empty?
+
+    gifts.join(', ') + ', and ' + last_gift
   end
 end
