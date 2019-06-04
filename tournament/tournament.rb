@@ -10,7 +10,7 @@ class Tournament
   end
 
   def tally(input)
-    @teams = {}
+    @teams = Hash.new { |hash, key| hash[key] = Team.new(key) }
     input.split("\n").each do |line|
       calculate_scores(line) if line
     end
@@ -19,14 +19,7 @@ class Tournament
 
   def calculate_scores(input)
     first_team, second_team, action = input.split(';')
-    initialize_teams(first_team, second_team) if second_team
     calculate_stats(first_team, second_team, action)
-  end
-
-  def initialize_teams(*teams)
-    teams.each do |team|
-      @teams[team] = Team.new(team) unless @teams.key?(team)
-    end
   end
 
   def calculate_stats(first_team, second_team, action)
