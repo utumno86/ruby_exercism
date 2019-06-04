@@ -26,31 +26,22 @@ class Tournament
   def initialize_teams(*teams)
     teams.each do |team|
       @teams[team] = Team.new(team) unless @teams.key?(team)
-      @teams[team].matches_played += 1
     end
   end
 
   def calculate_stats(first_team, second_team, action)
+    first_team = @teams[first_team]
+    second_team = @teams[second_team]
     case action
     when 'win'
-      win(first_team, second_team)
+      first_team.win!
+      second_team.lose!
     when 'loss'
-      win(second_team, first_team)
+      first_team.lose!
+      second_team.win!
     when 'draw'
-      draw(first_team, second_team)
-    end
-  end
-
-  def win(winner, loser)
-    @teams[winner].wins += 1
-    @teams[winner].points += 3
-    @teams[loser].losses += 1
-  end
-
-  def draw(*teams)
-    teams.each do |team|
-      @teams[team].draws += 1
-      @teams[team].points += 1
+      first_team.draw!
+      second_team.draw!
     end
   end
 
@@ -93,5 +84,22 @@ class Team
     @draws = 0
     @losses = 0
     @points = 0
+  end
+
+  def win!
+    @matches_played += 1
+    @wins += 1
+    @points += 3
+  end
+
+  def lose!
+    @matches_played += 1
+    @losses += 1
+  end
+
+  def draw!
+    @matches_played += 1
+    @draws += 1
+    @points += 1
   end
 end
