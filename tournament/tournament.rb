@@ -2,9 +2,6 @@
 
 # class to return a table of tournament wins/losses
 class Tournament
-  HEADER = 'Team                           | MP |  W |  D |  L |  P'
-  TEAM_NAME_WIDTH = HEADER.split('|')[0].length
-
   def self.tally(input)
     new.tally(input)
   end
@@ -14,7 +11,8 @@ class Tournament
     input.split("\n").each do |line|
       calculate_scores(line) if line
     end
-    print_table
+
+    Table.new(@teams).print_table!
   end
 
   def calculate_scores(input)
@@ -36,28 +34,6 @@ class Tournament
       first_team.draw!
       second_team.draw!
     end
-  end
-
-  def print_table
-    table = ''
-    table += HEADER + "\n"
-    @teams.sort_by { |_k, v| [-v.points, v.name] }.to_h.each_value do |team|
-      table += print_line(team) + "\n"
-    end
-    table
-  end
-
-  def print_line(team)
-    team.name + calculate_spaces(team) + score_columns(team)
-  end
-
-  def calculate_spaces(team)
-    spaces = TEAM_NAME_WIDTH - team.name.length
-    ' ' * spaces
-  end
-
-  def score_columns(team)
-    "|  #{team.matches_played} |  #{team.wins} |  #{team.draws} |  #{team.losses} |  #{team.points}"
   end
 end
 
@@ -94,5 +70,37 @@ class Team
     @matches_played += 1
     @draws += 1
     @points += 1
+  end
+end
+
+# Class to print out the results of the tournament
+class Table
+  HEADER = 'Team                           | MP |  W |  D |  L |  P'
+  TEAM_NAME_WIDTH = HEADER.split('|')[0].length
+
+  def initialize(teams)
+    @teams = teams
+  end
+
+  def print_table!
+    table = ''
+    table += HEADER + "\n"
+    @teams.sort_by { |_k, v| [-v.points, v.name] }.to_h.each_value do |team|
+      table += print_line(team) + "\n"
+    end
+    table
+  end
+
+  def print_line(team)
+    team.name + calculate_spaces(team) + score_columns(team)
+  end
+
+  def calculate_spaces(team)
+    spaces = TEAM_NAME_WIDTH - team.name.length
+    ' ' * spaces
+  end
+
+  def score_columns(team)
+    "|  #{team.matches_played} |  #{team.wins} |  #{team.draws} |  #{team.losses} |  #{team.points}"
   end
 end
