@@ -41,11 +41,11 @@ class TwelveDays
   end
 
   def verse(index)
-    "On the #{DAYS[index]} day of Christmas my true love gave to me: #{to_phrase(gifts(index+1))}"
+    "On the #{DAYS[index]} day of Christmas my true love gave to me: #{to_phrase(gifts(index))}"
   end
 
   def gifts(index)
-    GIFTS.take(index).reverse
+    GIFTS.take(index + 1).reverse
   end
 
   def to_phrase(gifts)
