@@ -26,7 +26,7 @@ class Tournament
   def initialize_teams(*teams)
     teams.each do |team|
       @teams[team] = Team.new(team) unless @teams.key?(team)
-      @teams[team].mp += 1
+      @teams[team].matches_played += 1
     end
   end
 
@@ -42,22 +42,22 @@ class Tournament
   end
 
   def win(winner, loser)
-    @teams[winner].w += 1
-    @teams[winner].p += 3
-    @teams[loser].l += 1
+    @teams[winner].wins += 1
+    @teams[winner].points += 3
+    @teams[loser].losses += 1
   end
 
   def draw(*teams)
     teams.each do |team|
-      @teams[team].d += 1
-      @teams[team].p += 1
+      @teams[team].draws += 1
+      @teams[team].points += 1
     end
   end
 
   def print_table
     table = ''
     table += HEADER + "\n"
-    @teams.sort_by { |_k, v| [-v.p, v.name] }.to_h.each_value do |team|
+    @teams.sort_by { |_k, v| [-v.points, v.name] }.to_h.each_value do |team|
       table += print_line(team) + "\n"
     end
     table
@@ -73,25 +73,25 @@ class Tournament
   end
 
   def score_columns(team)
-    "|  #{team.mp} |  #{team.w} |  #{team.d} |  #{team.l} |  #{team.p}"
+    "|  #{team.matches_played} |  #{team.wins} |  #{team.draws} |  #{team.losses} |  #{team.points}"
   end
 end
 
 # class to keep track of relevant information about teams
 class Team
   attr_accessor :name
-  attr_accessor :mp
-  attr_accessor :w
-  attr_accessor :d
-  attr_accessor :l
-  attr_accessor :p
+  attr_accessor :matches_played
+  attr_accessor :wins
+  attr_accessor :draws
+  attr_accessor :losses
+  attr_accessor :points
 
   def initialize(name)
     @name = name
-    @mp = 0
-    @w = 0
-    @d = 0
-    @l = 0
-    @p = 0
+    @matches_played = 0
+    @wins = 0
+    @draws = 0
+    @losses = 0
+    @points = 0
   end
 end
