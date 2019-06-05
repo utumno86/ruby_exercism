@@ -46,11 +46,9 @@ class Team
 
   def initialize(name)
     @name = name
-    @matches_played = 0
     @wins = 0
     @draws = 0
     @losses = 0
-    @points = 0
   end
 
   def win!
@@ -76,8 +74,7 @@ end
 
 # Class to print out the results of the tournament
 class Table
-  HEADER = 'Team                           | MP |  W |  D |  L |  P'
-  TEAM_NAME_WIDTH = HEADER.split('|')[0].length
+  HEADER = %w[Team MP W D L P].freeze
 
   def initialize(teams)
     @teams = teams
@@ -85,23 +82,22 @@ class Table
 
   def print_table!
     table = ''
-    table += HEADER + "\n"
-    @teams.sort_by { |_k, v| [-v.points, v.name] }.to_h.each_value do |team|
-      table += print_line(team) + "\n"
+    table += print_line(HEADER)
+    sorted_teams.each_value do |team|
+      table += print_line(score_columns(team))
     end
     table
   end
 
-  def print_line(team)
-    team.name + calculate_spaces(team) + score_columns(team)
+  def sorted_teams
+    @teams.sort_by { |_k, v| [-v.points, v.name] }.to_h
   end
 
-  def calculate_spaces(team)
-    spaces = TEAM_NAME_WIDTH - team.name.length
-    ' ' * spaces
+  def print_line(data)
+    '%-30s |%3s |%3s |%3s |%3s |%3s' % data + "\n"
   end
 
   def score_columns(team)
-    "|  #{team.matches_played} |  #{team.wins} |  #{team.draws} |  #{team.losses} |  #{team.points}"
+    [team.name, team.matches_played, team.wins, team.draws, team.losses, team.points]
   end
 end
