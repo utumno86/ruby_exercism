@@ -40,11 +40,9 @@ end
 # class to keep track of relevant information about teams
 class Team
   attr_accessor :name
-  attr_accessor :matches_played
   attr_accessor :wins
   attr_accessor :draws
   attr_accessor :losses
-  attr_accessor :points
 
   def initialize(name)
     @name = name
@@ -56,20 +54,23 @@ class Team
   end
 
   def win!
-    @matches_played += 1
     @wins += 1
-    @points += 3
   end
 
   def lose!
-    @matches_played += 1
     @losses += 1
   end
 
   def draw!
-    @matches_played += 1
     @draws += 1
-    @points += 1
+  end
+
+  def points
+    @wins * 3 + @draws
+  end
+
+  def matches_played
+    @wins + @losses + @draws
   end
 end
 
