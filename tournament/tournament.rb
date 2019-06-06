@@ -83,14 +83,14 @@ class Table
   def print_table!
     table = ''
     table += print_line(HEADER)
-    sorted_teams.each_value do |team|
+    sorted_teams.each do |team|
       table += print_line(score_columns(team))
     end
     table
   end
 
   def sorted_teams
-    @teams.sort_by { |_k, v| [-v.points, v.name] }.to_h
+    @teams.sort_by { |_k, v| [-v.points, v.name] }.map { |value| value[1] }
   end
 
   def print_line(data)
