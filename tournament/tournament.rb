@@ -74,19 +74,17 @@ end
 
 # Class to print out the results of the tournament
 class Table
-  HEADER = %w[Team MP W D L P].freeze
+  HEADER = %w[Team MP W D L P]
 
   def initialize(teams)
     @teams = teams
   end
 
   def print_table!
-    table = ''
-    table += print_line(HEADER)
-    sorted_teams.each do |team|
-      table += print_line(score_columns(team))
-    end
-    table
+    [print_line(HEADER)]
+      .concat(sorted_teams.map { |team| print_line(score_columns(team)) })
+      .join("\n")
+      .concat("\n")
   end
 
   def sorted_teams
@@ -94,7 +92,7 @@ class Table
   end
 
   def print_line(data)
-    '%-30s |%3s |%3s |%3s |%3s |%3s' % data + "\n"
+    '%-30s |%3s |%3s |%3s |%3s |%3s' % data
   end
 
   def score_columns(team)
