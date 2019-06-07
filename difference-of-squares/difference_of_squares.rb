@@ -16,7 +16,3 @@ class Squares
     square_of_sum - sum_of_squares
   end
 end
-
-class BookKeeping
-  VERSION = 3
-end
