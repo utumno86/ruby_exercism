@@ -88,7 +88,7 @@ class Table
   end
 
   def sorted_teams
-    @teams.sort_by { |_k, v| [-v.points, v.name] }.map { |value| value[1] }
+    @teams.sort_by { |_k, v| [-v.points, v.name] }.map { |_, value| value }
   end
 
   def print_line(data)
