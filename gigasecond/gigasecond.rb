@@ -5,7 +5,3 @@ class Gigasecond
     time + GIGASECOND
   end
 end
-
-class BookKeeping
-  VERSION = 6
-end
