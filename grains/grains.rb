@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 # grain class for calculating the thing
 class Grains
-  def self.square(n)
-    total = 1
-    if n > 1
-      (n - 1).times do
-        total *= 2
-      end
-    end
-    total
+  def self.square(num)
+    raise ArgumentError, 'Argument must be between 1 and 64, inclusive' unless num > 0 && num < 65
+
+    new.square(num)
   end
 
   def self.total
-    Grains.square(65) - 1
+    new.square(65) - 1
+  end
+
+  def square(num)
+    2**(num - 1)
   end
 end
