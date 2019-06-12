@@ -11,7 +11,3 @@ class Complement
     dna_strand.chars.any? { |x| !@dna_chars.include?(x) }
   end
 end
-
-class BookKeeping
-  VERSION = 4
-end
