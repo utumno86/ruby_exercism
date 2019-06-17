@@ -1,4 +1,3 @@
-
 # Class for implementing Eratosthene's Sieve
 class Sieve
   def initialize(limit)
@@ -7,7 +6,6 @@ class Sieve
   end
 
   def primes
-    puts @known_nonprimes
     (2..@limit).select { |n| prime?(n) }
   end
 
@@ -19,8 +17,4 @@ class Sieve
       false
     end
   end
-end
-
-class BookKeeping
-  VERSION = 1
 end
