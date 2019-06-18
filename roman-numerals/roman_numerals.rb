@@ -27,7 +27,3 @@ class Integer
     end
   end
 end
-
-class BookKeeping
-  VERSION = 2
-end
