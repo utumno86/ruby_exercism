@@ -22,7 +22,3 @@ class Prime
     @primes[n - 1]
   end
 end
-
-module BookKeeping
-  VERSION = 1
-end
