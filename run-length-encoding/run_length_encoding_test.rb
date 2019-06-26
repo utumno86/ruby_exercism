@@ -1,74 +1,84 @@
-#!/usr/bin/env ruby
-# encoding: utf-8
-gem 'minitest', '>= 5.0.0'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative 'run_length_encoding'
 
-# Test data version:
-# deb225e Implement canonical dataset for scrabble-score problem (#255)
-
+# Common test data version: 1.1.0 1b7900e
 class RunLengthEncodingTest < Minitest::Test
-  def test_encode_simple
+  def test_encode_empty_string
+    input = ''
+    output = ''
+    assert_equal output, RunLengthEncoding.encode(input)
+  end
+
+  def test_encode_single_characters_only_are_encoded_without_count
+    input = 'XYZ'
+    output = 'XYZ'
+    assert_equal output, RunLengthEncoding.encode(input)
+  end
+
+  def test_encode_string_with_no_single_characters
     input = 'AABBBCCCC'
     output = '2A3B4C'
     assert_equal output, RunLengthEncoding.encode(input)
   end
 
-  def test_decode_simple
-    input = '2A3B4C'
-    output = 'AABBBCCCC'
-    assert_equal output, RunLengthEncoding.decode(input)
-  end
-
-  def test_encode_with_single_values
+  def test_encode_single_characters_mixed_with_repeated_characters
     input = 'WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB'
     output = '12WB12W3B24WB'
     assert_equal output, RunLengthEncoding.encode(input)
   end
 
-  def test_decode_with_single_values
+  def test_encode_multiple_whitespace_mixed_in_string
+    input = '  hsqq qww  '
+    output = '2 hs2q q2w2 '
+    assert_equal output, RunLengthEncoding.encode(input)
+  end
+
+  def test_encode_lowercase_characters
+    input = 'aabbbcccc'
+    output = '2a3b4c'
+    assert_equal output, RunLengthEncoding.encode(input)
+  end
+
+  def test_decode_empty_string
+    input = ''
+    output = ''
+    assert_equal output, RunLengthEncoding.decode(input)
+  end
+
+  def test_decode_single_characters_only
+    input = 'XYZ'
+    output = 'XYZ'
+    assert_equal output, RunLengthEncoding.decode(input)
+  end
+
+  def test_decode_string_with_no_single_characters
+    input = '2A3B4C'
+    output = 'AABBBCCCC'
+    assert_equal output, RunLengthEncoding.decode(input)
+  end
+
+  def test_decode_single_characters_with_repeated_characters
     input = '12WB12W3B24WB'
     output = 'WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB'
     assert_equal output, RunLengthEncoding.decode(input)
   end
 
-  def test_decode_encode_combination
-    input = 'zzz ZZ  zZ'
-    output = 'zzz ZZ  zZ'
-    assert_equal output,
-    RunLengthEncoding.decode(RunLengthEncoding.encode(input))
-  end
-
-  def test_encode_unicode
-    input = '⏰⚽⚽⚽⭐⭐⏰'
-    output = '⏰3⚽2⭐⏰'
-    assert_equal output, RunLengthEncoding.encode(input)
-  end
-
-  def test_decode_unicode
-    input = '⏰3⚽2⭐⏰'
-    output = '⏰⚽⚽⚽⭐⭐⏰'
+  def test_decode_multiple_whitespace_mixed_in_string
+    input = '2 hs2q q2w2 '
+    output = '  hsqq qww  '
     assert_equal output, RunLengthEncoding.decode(input)
   end
 
-  # Problems in exercism evolve over time, as we find better ways to ask
-  # questions.
-  # The version number refers to the version of the problem you solved,
-  # not your solution.
-  #
-  # Define a constant named VERSION inside of the top level BookKeeping
-  # module.
-  #  In your file, it will look like this:
-  #
-  # module BookKeeping
-  #   VERSION = 1 # Where the version number matches the one in the test.
-  # end
-  #
-  # If you are curious, read more about constants on RubyDoc:
-  # http://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/constants.html
+  def test_decode_lower_case_string
+    input = '2a3b4c'
+    output = 'aabbbcccc'
+    assert_equal output, RunLengthEncoding.decode(input)
+  end
 
-  def test_bookkeeping
-    assert_equal 2, BookKeeping::VERSION
+  def test_consistency_encode_followed_by_decode_gives_original_string
+    input = 'zzz ZZ  zZ'
+    encoded = RunLengthEncoding.encode(input)
+    assert_equal input, RunLengthEncoding.decode(encoded)
   end
 end

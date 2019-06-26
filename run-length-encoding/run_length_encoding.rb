@@ -1,7 +1,3 @@
-module BookKeeping
-  VERSION = 2
-end
-
 class RunLengthEncoding
   def initialize
   end
