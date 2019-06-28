@@ -14,6 +14,8 @@ class SumOfMultiples
   private
 
   def return_factors(i)
+    return 0 unless i.poitive?
+
     @factors.any? { |factor| (i % factor).zero? }
   end
 end
