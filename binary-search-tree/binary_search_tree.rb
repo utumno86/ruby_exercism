@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
+# Class for creating a binary search tree
 class Bst
-  attr_reader :data, :left, :right
 
   def initialize(data)
     @array_index = 0
