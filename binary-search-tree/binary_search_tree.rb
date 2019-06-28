@@ -2,29 +2,31 @@
 
 # Class for creating a binary search tree
 class Bst
-
-  def initialize(data)
+  def initialize(input_data)
     @array_index = 0
-    @data_array = [data]
-    @data = @data_array[@array_index]
+    @data_array = [input_data]
   end
 
   def insert(new_data)
-    index = @data_array[@array_index]
-    if new_data > index
+    if new_data > data
       @data_array.push(new_data)
-    elsif new_data < index
+    elsif new_data <= data
       @data_array.unshift(new_data)
       @array_index += 1
     end
   end
 
   def left
-    @data = @data_array[@array_index - 1]
+    @array_index -= 1
+    self
   end
 
   def right
-    @data = @data_array[@array_index + 1]
+    @array_index += 1
+    self
   end
 
+  def data
+    @data_array[@array_index]
+  end
 end
