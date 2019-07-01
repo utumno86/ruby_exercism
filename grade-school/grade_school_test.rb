@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-gem 'minitest', '>= 5.0.0'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative 'grade_school'
@@ -12,6 +10,7 @@ class SchoolTest < Minitest::Test
   end
 
   def test_add_student
+
     school = School.new
     assert school.add('Aimee', 2)
     expected = ['Aimee']
@@ -19,6 +18,7 @@ class SchoolTest < Minitest::Test
   end
 
   def test_add_students_to_different_grades
+
     school = School.new
     school.add('Aimee', 3)
     school.add('Beemee', 7)
@@ -27,6 +27,7 @@ class SchoolTest < Minitest::Test
   end
 
   def test_grade_with_multiple_students
+
     school = School.new
     grade    = 6
     students = %w(Aimee Beemee Ceemee)
@@ -35,6 +36,7 @@ class SchoolTest < Minitest::Test
   end
 
   def test_grade_with_multiple_students_sorts_correctly
+
     school = School.new
     grade    = 6
     students = %w(Beemee Aimee Ceemee)
@@ -44,12 +46,14 @@ class SchoolTest < Minitest::Test
   end
 
   def test_empty_students_by_grade
+
     school = School.new
     expected = []
     assert_equal expected, school.students_by_grade
   end
 
   def test_students_by_grade
+
     school = School.new
     grade    = 6
     students = %w(Beemee Aimee Ceemee)
@@ -59,6 +63,7 @@ class SchoolTest < Minitest::Test
   end
 
   def test_students_by_grade_sorted
+
     school = School.new
     everyone.each do |grade|
       grade[:students].each { |student| school.add(student, grade[:grade]) }
@@ -81,26 +86,5 @@ class SchoolTest < Minitest::Test
       { grade: 2, students: %w(Aimee Beemee Ceemee) },
       { grade: 3, students: %w(Deemee Eeemee) }
     ]
-  end
-
-  # Problems in exercism evolve over time, as we find better ways to ask
-  # questions.
-  # The version number refers to the version of the problem you solved,
-  # not your solution.
-  #
-  # Define a constant named VERSION inside of the top level BookKeeping
-  # module, which may be placed near the end of your file.
-  #
-  # In your file, it will look like this:
-  #
-  # module BookKeeping
-  #   VERSION = 2 # Where the version number matches the one in the test.
-  # end
-  #
-  # If you are curious, read more about constants on RubyDoc:
-  # http://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/constants.html
-
-  def test_bookkeeping
-    assert_equal 3, BookKeeping::VERSION
   end
 end
