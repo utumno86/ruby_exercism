@@ -1,9 +1,8 @@
-#!/usr/bin/env ruby
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative 'phone_number'
 
-# Common test data version: 1.2.0 39cba0d
+# Common test data version: 1.6.1 fc57696
 class PhoneNumberTest < Minitest::Test
   def test_cleans_the_number
     assert_equal "2234567890", PhoneNumber.clean("(223) 456-7890")
@@ -38,44 +37,42 @@ class PhoneNumberTest < Minitest::Test
   end
 
   def test_invalid_with_letters
-    skip
     assert_nil PhoneNumber.clean("123-abc-7890")
   end
 
   def test_invalid_with_punctuations
-    skip
     assert_nil PhoneNumber.clean("123-@:!-7890")
   end
 
-  def test_invalid_if_area_code_does_not_start_with_2_9
-    skip
+  def test_invalid_if_area_code_starts_with_0
+    assert_nil PhoneNumber.clean("(023) 456-7890")
+  end
+
+  def test_invalid_if_area_code_starts_with_1
     assert_nil PhoneNumber.clean("(123) 456-7890")
   end
 
-  def test_invalid_if_exchange_code_does_not_start_with_2_9
-    skip
+  def test_invalid_if_exchange_code_starts_with_0
     assert_nil PhoneNumber.clean("(223) 056-7890")
   end
 
-  # Problems in exercism evolve over time, as we find better ways to ask
-  # questions.
-  # The version number refers to the version of the problem you solved,
-  # not your solution.
-  #
-  # Define a constant named VERSION inside of the top level BookKeeping
-  # module, which may be placed near the end of your file.
-  #
-  # In your file, it will look like this:
-  #
-  # module BookKeeping
-  #   VERSION = 1 # Where the version number matches the one in the test.
-  # end
-  #
-  # If you are curious, read more about constants on RubyDoc:
-  # http://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/constants.html
+  def test_invalid_if_exchange_code_starts_with_1
+    assert_nil PhoneNumber.clean("(223) 156-7890")
+  end
 
-  def test_bookkeeping
-    skip
-    assert_equal 2, BookKeeping::VERSION
+  def test_invalid_if_area_code_starts_with_0_on_valid_11_digit_number
+    assert_nil PhoneNumber.clean("1 (023) 456-7890")
+  end
+
+  def test_invalid_if_area_code_starts_with_1_on_valid_11_digit_number
+    assert_nil PhoneNumber.clean("1 (123) 456-7890")
+  end
+
+  def test_invalid_if_exchange_code_starts_with_0_on_valid_11_digit_number
+    assert_nil PhoneNumber.clean("1 (223) 056-7890")
+  end
+
+  def test_invalid_if_exchange_code_starts_with_1_on_valid_11_digit_number
+    assert_nil PhoneNumber.clean("1 (223) 156-7890")
   end
 end
