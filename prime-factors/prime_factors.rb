@@ -2,8 +2,13 @@
 # of a given number
 class PrimeFactors
   def self.for(number)
+    new.for(number)
+  end
+
+  def for(number)
     prime_factors = []
-    (2..number).each do |potential|
+    limit = number < 1000 ? number : Math.sqrt(number).to_i + 1_000_000
+    (2..limit).each do |potential|
       while factor?(potential, number)
         prime_factors << potential
         number /= potential
@@ -12,7 +17,7 @@ class PrimeFactors
     prime_factors
   end
 
-  def self.factor?(potential, number)
+  def factor?(potential, number)
     (number % potential).zero?
   end
 end
