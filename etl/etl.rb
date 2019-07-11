@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Extract Transform Load script
 class ETL
   def self.transform(old)
@@ -9,8 +11,4 @@ class ETL
     end
     new
   end
-end
-
-class BookKeeping
-  VERSION = 1
 end
