@@ -1,5 +1,9 @@
 # Program that automatically generates the beer song.
 class BeerSong
+  def self.recite(initial_verse, number_of_iterations)
+    new.recite(initial_verse, number_of_iterations)
+  end
+
   def verse(verse_index)
     verse_index = verse_index.to_s
     if verse_index == '2'
@@ -13,20 +17,16 @@ class BeerSong
     end
   end
 
-  def verses(initial_verse, ending_verse)
-    index = initial_verse.to_i
+  def recite(initial_verse, number_of_iterations)
     result = ''
-    while index >= ending_verse.to_i
-      result += verse(index.to_s)
-      if index != ending_verse.to_i
+    verse_index = initial_verse
+    number_of_iterations.times do |index|
+      result += verse(verse_index)
+      verse_index -= 1
+      if number_of_iterations > index + 1
         result += "\n"
       end
-      index -= 1
     end
     result
   end
-end
-
-class BookKeeping
-  VERSION = 3
 end
