@@ -1,5 +1,4 @@
 class Game
-
   def initialize
     @score = 0
     @strikes = []
@@ -84,7 +83,3 @@ class Game
 end
 
 class Game::BowlingError < StandardError; end
-
-class BookKeeping
-  VERSION = 3
-end
