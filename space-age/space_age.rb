@@ -22,7 +22,3 @@ class SpaceAge
     end
   end
 end
-
-class BookKeeping
-  VERSION = 1
-end
