@@ -1,6 +1,5 @@
 # A Class to produce the food-chain nursery rhyme
 class FoodChain
-  VERSION = 2
   @animals = {
     'fly' => "I don't know why she swallowed the fly. Perhaps she'll die.",
     'spider' => 'It wriggled and jiggled and tickled inside her.',

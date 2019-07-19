@@ -1,18 +1,16 @@
 # Food Chain
 
-Write a program that generates the lyrics of the song 'I Know an Old Lady Who Swallowed a Fly'
+Generate the lyrics of the song 'I Know an Old Lady Who Swallowed a Fly'.
 
-Write a program that generates the lyrics to the song
-"I know an old lady who swallowed a fly". While you could
-copy/paste the lyrics, or read them from a file, this
-problem is much more interesting if you approach it
-algorithmically.
+While you could copy/paste the lyrics,
+or read them from a file, this problem is much more
+interesting if you approach it algorithmically.
 
 This is a [cumulative song](http://en.wikipedia.org/wiki/Cumulative_song) of unknown origin.
 
 This is one of many common variants.
 
-```plain
+```text
 I know an old lady who swallowed a fly.
 I don't know why she swallowed the fly. Perhaps she'll die.
 
@@ -68,7 +66,7 @@ She's dead, of course!
 * * * *
 
 For installation and learning resources, refer to the
-[exercism help page](http://help.exercism.io/getting-started-with-ruby.html).
+[Ruby resources page](http://exercism.io/languages/ruby/resources).
 
 For running the tests provided, you will need the Minitest gem. Open a
 terminal window and run the following command to install minitest:
@@ -76,25 +74,21 @@ terminal window and run the following command to install minitest:
     gem install minitest
 
 If you would like color output, you can `require 'minitest/pride'` in
-the test file, or note the alternative instruction, below, for runnng
+the test file, or note the alternative instruction, below, for running
 the test file.
 
-In order to run the test, you can run the test file from the exercise
-directory. For example, if the test suite is called
-`hello_world_test.rb`, you can run the following command:
+Run the tests from the exercise directory using the following command:
 
-    ruby hello_world_test.rb
+    ruby food_chain_test.rb
 
 To include color from the command line:
 
-    ruby -rminitest/pride hello_world_test.rb
-
-The test files may have the execution bit set so you may also be able to
-run it like this:
-
-    ./hello_world_test.rb
+    ruby -r minitest/pride food_chain_test.rb
 
 
 ## Source
 
-Wikipedia [view source](http://en.wikipedia.org/wiki/There_Was_an_Old_Lady_Who_Swallowed_a_Fly)
+Wikipedia [http://en.wikipedia.org/wiki/There_Was_an_Old_Lady_Who_Swallowed_a_Fly](http://en.wikipedia.org/wiki/There_Was_an_Old_Lady_Who_Swallowed_a_Fly)
+
+## Submitting Incomplete Solutions
+It's possible to submit an incomplete solution so you can see how others have completed the exercise.
