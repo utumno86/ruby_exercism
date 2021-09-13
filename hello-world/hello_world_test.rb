@@ -1,7 +1,6 @@
 begin
   gem 'minitest', '>= 5.0.0'
   require 'minitest/autorun'
-  require 'minitest/pride'
   require_relative 'hello_world'
 rescue Gem::LoadError => e
   puts "\nMissing Dependency:\n#{e.backtrace.first} #{e.message}"
@@ -15,6 +14,7 @@ end
 # Common test data version: 1.1.0 be3ae66
 class HelloWorldTest < Minitest::Test
   def test_say_hi
+    # skip
     assert_equal "Hello, World!", HelloWorld.hello
   end
 end
