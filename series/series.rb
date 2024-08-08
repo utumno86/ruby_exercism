@@ -5,7 +5,7 @@ class Series
   end
 
   def slices(series_length)
-    raise ArgumentError if series_length > @series.length
+    raise ArgumentError if series_length > @series.length || series_length <= 0
     (0..@series.length - series_length).collect do |i|
       @series[i...(i + series_length)]
     end
