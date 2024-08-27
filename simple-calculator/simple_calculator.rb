@@ -3,6 +3,7 @@ class SimpleCalculator
 
   def self.calculate(first_operand, second_operand, operation)
     raise ArgumentError if first_operand.to_i != first_operand or second_operand.to_i != second_operand
+    raise UnsupportedOperation if !ALLOWED_OPERATIONS.include?(operation)
     value = ''
     case operation
     when '+'
@@ -29,5 +30,8 @@ class SimpleCalculator
 
   def self.multiplication(first, second)
     first * second
+  end
+
+  class UnsupportedOperation < StandardError
   end
 end
