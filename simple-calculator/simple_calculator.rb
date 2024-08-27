@@ -2,6 +2,7 @@ class SimpleCalculator
   ALLOWED_OPERATIONS = ['+', '/', '*'].freeze
 
   def self.calculate(first_operand, second_operand, operation)
+    raise ArgumentError if first_operand.to_i != first_operand or second_operand.to_i != second_operand
     value = ''
     case operation
     when '+'
@@ -19,14 +20,14 @@ class SimpleCalculator
   private
 
   def self.addition(first, second)
-    first.to_i + second.to_i
+    first + second
   end
 
   def self.division(first, second)
-    first.to_i / second.to_i
+    first / second
   end
 
   def self.multiplication(first, second)
-    first.to_i * second.to_i
+    first * second
   end
 end
