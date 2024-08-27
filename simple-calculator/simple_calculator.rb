@@ -7,6 +7,7 @@ class SimpleCalculator
     when '+'
       value = self.addition(first_operand, second_operand)
     when '/'
+      return "Division by zero is not allowed." if second_operand == 0
       value = self.division(first_operand, second_operand)
     when '*'
       value = self.multiplication(first_operand, second_operand)
@@ -28,5 +29,4 @@ class SimpleCalculator
   def self.multiplication(first, second)
     first.to_i * second.to_i
   end
-
 end
