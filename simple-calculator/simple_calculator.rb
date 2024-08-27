@@ -6,6 +6,10 @@ class SimpleCalculator
     case operation
     when '+'
       value = self.addition(first_operand, second_operand)
+    when '/'
+      value = self.division(first_operand, second_operand)
+    when '*'
+      value = self.multiplication(first_operand, second_operand)
     end
 
     "#{first_operand} #{operation} #{second_operand} = #{value}"
@@ -15,6 +19,14 @@ class SimpleCalculator
 
   def self.addition(first, second)
     first.to_i + second.to_i
+  end
+
+  def self.division(first, second)
+    first.to_i / second.to_i
+  end
+
+  def self.multiplication(first, second)
+    first.to_i * second.to_i
   end
 
 end
