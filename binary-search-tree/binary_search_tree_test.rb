@@ -1,5 +1,4 @@
 require 'minitest/autorun'
-require 'minitest/pride'
 require_relative 'binary_search_tree'
 
 class BstTest < Minitest::Test
@@ -8,6 +7,7 @@ class BstTest < Minitest::Test
   end
 
   def test_inserting_less
+    skip
     four = Bst.new 4
     four.insert 2
     assert_equal 4, four.data
@@ -15,6 +15,7 @@ class BstTest < Minitest::Test
   end
 
   def test_inserting_same
+    skip
     four = Bst.new 4
     four.insert 4
     assert_equal 4, four.data
@@ -22,6 +23,7 @@ class BstTest < Minitest::Test
   end
 
   def test_inserting_right
+    skip
     four = Bst.new 4
     four.insert 5
     assert_equal 4, four.data
@@ -29,6 +31,7 @@ class BstTest < Minitest::Test
   end
 
   def test_complex_tree
+    skip
     four = Bst.new 4
     four.insert 2
     four.insert 6
@@ -94,27 +97,5 @@ class BstTest < Minitest::Test
     (1..7).each { |x| assert_equal(x, each_enumerator.next) }
 
     assert_raises(StopIteration) { each_enumerator.next }
-  end
-
-  # Problems in exercism evolve over time, as we find better ways to ask
-  # questions.
-  # The version number refers to the version of the problem you solved,
-  # not your solution.
-  #
-  # Define a constant named VERSION inside of the top level BookKeeping
-  # module, which may be placed near the end of your file.
-  #
-  # In your file, it will look like this:
-  #
-  # module BookKeeping
-  #   VERSION = 1 # Where the version number matches the one in the test.
-  # end
-  #
-  # If you are curious, read more about constants on RubyDoc:
-  # http://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/constants.html
-
-  def test_bookkeeping
-    skip
-    assert_equal 1, BookKeeping::VERSION
   end
 end

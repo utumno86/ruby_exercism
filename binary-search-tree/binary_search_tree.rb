@@ -1,32 +1,7 @@
-# frozen_string_literal: true
+=begin
+Write your code for the 'Binary Search Tree' exercise in this file. Make the tests in
+`binary_search_tree_test.rb` pass.
 
-# Class for creating a binary search tree
-class Bst
-  def initialize(input_data)
-    @array_index = 0
-    @data_array = [input_data]
-  end
-
-  def insert(new_data)
-    if new_data > data
-      @data_array.push(new_data)
-    elsif new_data <= data
-      @data_array.unshift(new_data)
-      @array_index += 1
-    end
-  end
-
-  def left
-    @array_index -= 1
-    self
-  end
-
-  def right
-    @array_index += 1
-    self
-  end
-
-  def data
-    @data_array[@array_index]
-  end
-end
+To get started with TDD, see the `README.md` file in your
+`ruby/binary-search-tree` directory.
+=end
