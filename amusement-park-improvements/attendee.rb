@@ -17,11 +17,11 @@ class Attendee
    @pass_id != nil
   end
 
-  def fits_ride?(ride_minimum_height)
-    @height >= ride_minimum_height
+  def fits_ride?(ride_height)
+    @height >= ride_height
   end
 
-  def allowed_to_ride?(ride_minimum_height)
-    fits_ride?(ride_minimum_height) && has_pass?
+  def allowed_to_ride?(ride_height)
+    fits_ride?(ride_height) && has_pass?
   end
 end
